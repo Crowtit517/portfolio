@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>잡초 포트폴리오</title>
+  <style>
+    /* ============================================================
+       잡초 포트폴리오 — 단일 파일 CSS
+       수정할 때 이 박스 안을 편집하면 됩니다.
+       ============================================================ */
+
+    /* ---- 기본 리셋 & 변수 ---- */
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg:        #0e0e0f;
+      --surface:   #18181b;
+      --border:    #27272a;
+      --text:      #f4f4f5;
+      --text-dim:  #a1a1aa;
+      --accent:    #4ade80;   /* 취향에 따라 변경: #89b4fa, #f59e0b 등 */
+      --accent-2: #22d3ee;
+      --radius:    12px;
+      --max-w:     720px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ---- 공통 ---- */
+    .container {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    section { padding: 80px 0; }
+
+    h2 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 32px;
+    }
+
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* ============================================================
+       1. 히어로 섹션
+       ============================================================ */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 40px 0;
+    }
+
+    .hero-avatar {
+      width: 96px;
+      height: 96px;
+      border-radius: 50%;
+      background: var(--surface);
+      border: 2px solid var(--border);
+      display: grid;
+      place-items: center;
+      font-size: 2.4rem;
+      margin-bottom: 28px;
+      /* 사진이 있다면 아래 주석을 지우고 <img> 로 교체 */
+      /* <img src="your-photo.jpg" alt="소개 사진" style="width:100%;height:100%;border-radius:50%;object-fit:cover;"> */
+    }
+
+    .hero-name {
+      font-size: 2.4rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+    }
+
+    .hero-tagline {
+      font-size: 1.1rem;
+      color: var(--text-dim);
+      max-width: 480px;
+      margin-bottom: 36px;
+    }
+
+    .hero-cta {
+      display: inline-flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 10px 22px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: background 0.2s, transform 0.15s;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #0e0e0f;
+    }
+
+    .btn-primary:hover {
+      background: #22c55e;
+      text-decoration: none;
+      transform: translateY(-1px);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    .btn-ghost:hover {
+      border-color: var(--text-dim);
+      text-decoration: none;
+      transform: translateY(-1px);
+    }
+
+    /* ============================================================
+       2. 자기소개 (About)
+       ============================================================ */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: start;
+    }
+
+    .about-text p {
+      color: var(--text-dim);
+      margin-bottom: 16px;
+    }
+
+    .about-text p:last-child { margin-bottom: 0; }
+
+    .about-details {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+    }
+
+    .about-details dt {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-dim);
+      margin-bottom: 4px;
+    }
+
+    .about-details dd {
+      font-size: 0.95rem;
+      margin-bottom: 18px;
+      color: var(--text);
+    }
+
+    .about-details dd:last-child { margin-bottom: 0; }
+
+    /* ============================================================
+       3. 프로젝트 (Projects)
+       ============================================================ */
+    .project-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+      margin-bottom: 20px;
+      transition: border-color 0.2s;
+    }
+
+    .project-card:hover {
+      border-color: #3f3f46;
+    }
+
+    .project-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .project-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+    }
+
+    .project-badge {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 4px 10px;
+      border-radius: 20px;
+      background: rgba(74, 222, 128, 0.12);
+      color: var(--accent);
+      white-space: nowrap;
+      flex-shrink: 0;
+      margin-top: 4px;
+    }
+
+    .project-desc {
+      color: var(--text-dim);
+      font-size: 0.95rem;
+      margin-bottom: 20px;
+    }
+
+    .project-tech {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+
+    .tech-tag {
+      font-size: 0.78rem;
+      padding: 4px 12px;
+      border-radius: 6px;
+      background: #27272a;
+      color: var(--text-dim);
+      border: 1px solid var(--border);
+    }
+
+    .project-links {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .project-links a {
+      font-size: 0.85rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* ============================================================
+       4. 기술 스택 (Skills)
+       ============================================================ */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .skill-category h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-dim);
+      margin-bottom: 12px;
+    }
+
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .skill-tags .tech-tag {
+      background: var(--surface);
+      border-color: var(--border);
+    }
+
+    /* ============================================================
+       5. 연락처 (Contact)
+       ============================================================ */
+    .contact-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 16px 20px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      transition: border-color 0.2s;
+    }
+
+    .contact-item:hover {
+      border-color: #3f3f46;
+    }
+
+    .contact-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: var(--bg);
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+      font-size: 1.1rem;
+    }
+
+    .contact-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-dim);
+      margin-bottom: 2px;
+    }
+
+    .contact-value {
+      font-size: 0.95rem;
+      color: var(--text);
+    }
+
+    .contact-value a {
+      color: var(--accent);
+    }
+
+    /* ============================================================
+       6. 푸터 (Footer)
+       ============================================================ */
+    footer {
+      text-align: center;
+      padding: 40px 0;
+      border-top: 1px solid var(--border);
+      margin-top: 40px;
+    }
+
+    footer p {
+      font-size: 0.8rem;
+      color: var(--text-dim);
+    }
+
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .social-links a {
+      font-size: 0.85rem;
+      padding: 6px 14px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .social-links a:hover {
+      border-color: var(--text-dim);
+      background: var(--surface);
+      text-decoration: none;
+    }
+
+    /* ============================================================
+       모바일 반응형
+       ============================================================ */
+    @media (max-width: 600px) {
+      .about-grid,
+      .skills-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-name { font-size: 1.8rem; }
+
+      section { padding: 56px 0; }
+
+      .hero { min-height: auto; padding: 80px 0 40px; }
+    }
+
+    /* ============================================================
+       스크롤 애니 (가벼운 등장 효과)
+       ============================================================ */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================================
+       히어로 섹션
+       이름, 한 줄 소개, CTA 버튼 — 여기서 먼저 수정하세요.
+       ============================================================ -->
+  <header class="hero">
+    <div class="container">
+      <!-- 아바타 영역: 사진이 있으면 <img> 로 교체하세요 -->
+      <div class="hero-avatar" aria-hidden="true">🌱</div>
+
+      <h1 class="hero-name">잡초</h1>
+      <p class="hero-tagline">
+        컴퓨터공학부 3학년.<br>
+        Claude Code로 AI 팩토리 제조 에이전트를 만들고 있습니다.
+      </p>
+
+      <div class="hero-cta">
+        <a href="#projects" class="btn btn-primary">프로젝트 보기</a>
+        <a href="#contact" class="btn btn-ghost">연락하기</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============================================================
+       자기소개 (About)
+       ============================================================ -->
+  <section id="about">
+    <div class="container">
+      <h2>About</h2>
+
+      <div class="about-grid">
+        <div class="about-text fade-up">
+          <p>
+            안녕하세요, 잡초입니다. 현재 컴퓨터공학부 3학년에 재학 중이며,
+            AI 에이전트와 제조 현장의 접점에 관심이 많아 Claude Code 기반으로
+            AI 팩토리 제조 에이전트를 직접 개발하고 있습니다.
+          </p>
+          <p>
+            문제를 정의하고, 필요한 도구를 조합해 실제 동작하는 결과물로 만드는
+            과정을 즐깁니다. 아직 완성형은 아니지만, 꾸준히 프로토타입을
+            개선해 나가고 있습니다.
+          </p>
+        </div>
+
+        <dl class="about-details fade-up">
+          <dt>이름</dt>
+          <dd>잡초</dd>
+
+          <dt>전공</dt>
+          <dd>컴퓨터공학</dd>
+
+          <dt>학년</dt>
+          <dd>3학년</dd>
+
+          <dt>관심 분야</dt>
+          <dd>AI 에이전트, MLOps, 제조 자동화</dd>
+
+          <dt>현재 프로젝트</dt>
+          <dd>AI 팩토리 제조 에이전트 (Claude Code 기반)</dd>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       프로젝트 (Projects)
+       메인 프로젝트인 AI 팩토리 제조 에이전트를 먼저 배치하고,
+       추가 프로젝트가 있으면 아래 <article class="project-card"> 를
+       복사해서 추가하세요.
+       ============================================================ -->
+  <section id="projects">
+    <div class="container">
+      <h2>Projects</h2>
+
+      <!-- ==== 프로젝트 1: AI 팩토리 제조 에이전트 ==== -->
+      <article class="project-card fade-up">
+        <div class="project-header">
+          <div>
+            <h3 class="project-title">AI 팩토리 제조 에이전트</h3>
+            <span class="project-badge">개발 중 · Prototyping</span>
+          </div>
+        </div>
+
+        <p class="project-desc">
+          제조 공정 데이터를 기반으로 이상 탐지 및 공정 최적화 제안을 수행하는
+          AI 에이전트입니다. Claude Code를 활용해 워크플로우를 자동화하고,
+          현장에서 바로 활용 가능한 형태로 프로토타입을 만들고 있습니다.
+        </p>
+
+        <div class="project-tech">
+          <!-- 사용 중인 기술만 남기거나 수정하세요 -->
+          <span class="tech-tag">Claude Code</span>
+          <span class="tech-tag">Python</span>
+          <span class="tech-tag">LangChain</span>
+          <span class="tech-tag">AI Agent</span>
+          <span class="tech-tag">제조 데이터</span>
+        </div>
+
+        <div class="project-links">
+          <a href="https://github.com/Crowtit517/your-repo" target="_blank" rel="noopener">
+            GitHub → (링크 수정 필요)
+          </a>
+          <a href="#" target="_blank" rel="noopener">
+            데모 영상 → (준비 중이면 링크 삭제)
+          </a>
+        </div>
+      </article>
+
+      <!-- ==== 프로젝트 추가하려면 아래 블록을 복사하세요 ==== -->
+      <!--
+      <article class="project-card fade-up">
+        <div class="project-header">
+          <div>
+            <h3 class="project-title">프로젝트 이름</h3>
+            <span class="project-badge">상태</span>
+          </div>
+        </div>
+        <p class="project-desc">설명</p>
+        <div class="project-tech">
+          <span class="tech-tag">기술 1</span>
+          <span class="tech-tag">기술 2</span>
+        </div>
+        <div class="project-links">
+          <a href="#" target="_blank" rel="noopener">GitHub →</a>
+        </div>
+      </article>
+      -->
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       기술 스택 (Skills)
+       ============================================================ -->
+  <section id="skills">
+    <div class="container">
+      <h2>Skills</h2>
+
+      <div class="skills-grid">
+        <div class="skill-category fade-up">
+          <h3>언어</h3>
+          <div class="skill-tags">
+            <span class="tech-tag">Python</span>
+            <span class="tech-tag">JavaScript</span>
+            <!-- 추가/삭제 자유롭게 -->
+          </div>
+        </div>
+
+        <div class="skill-category fade-up">
+          <h3>프레임워크·도구</h3>
+          <div class="skill-tags">
+            <span class="tech-tag">Claude Code</span>
+            <span class="tech-tag">LangChain</span>
+            <span class="tech-tag">Git</span>
+            <!-- 추가/삭제 자유롭게 -->
+          </div>
+        </div>
+
+        <div class="skill-category fade-up">
+          <h3>관심사</h3>
+          <div class="skill-tags">
+            <span class="tech-tag">AI 에이전트</span>
+            <span class="tech-tag">MLOps</span>
+            <span class="tech-tag">제조 자동화</span>
+            <!-- 추가/삭제 자유롭게 -->
+          </div>
+        </div>
+
+        <div class="skill-category fade-up">
+          <h3>진행 중인 학습</h3>
+          <div class="skill-tags">
+            <span class="tech-tag">LLM 파이프라인</span>
+            <!-- 추가/삭제 자유롭게 -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       연락처 (Contact)
+       이메일, GitHub, LinkedIn 등 실제 정보로 수정하세요.
+       ============================================================ -->
+  <section id="contact">
+    <div class="container">
+      <h2>Contact</h2>
+
+      <div class="contact-list">
+        <a href="mailto:your-email@example.com" class="contact-item fade-up" style="text-decoration:none;">
+          <div class="contact-icon">✉️</div>
+          <div>
+            <div class="contact-label">Email</div>
+            <div class="contact-value"><a href="mailto:your-email@example.com">your-email@example.com</a></div>
+          </div>
+        </a>
+
+        <a href="https://github.com/Crowtit517" target="_blank" rel="noopener" class="contact-item fade-up" style="text-decoration:none;">
+          <div class="contact-icon">🐙</div>
+          <div>
+            <div class="contact-label">GitHub</div>
+            <div class="contact-value">github.com/Crowtit517</div>
+          </div>
+        </a>
+
+        <a href="https://linkedin.com/in/your-profile" target="_blank" rel="noopener" class="contact-item fade-up" style="text-decoration:none;">
+          <div class="contact-icon">💼</div>
+          <div>
+            <div class="contact-label">LinkedIn</div>
+            <div class="contact-value">linkedin.com/in/your-profile</div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       푸터
+       ============================================================ -->
+  <footer>
+    <div class="container">
+      <div class="social-links">
+        <a href="https://github.com/Crowtit517" target="_blank" rel="noopener">GitHub</a>
+        <a href="mailto:your-email@example.com">Email</a>
+      </div>
+      <p>&copy; 2026 잡초 포트폴리오. Built with HTML + CSS.</p>
+    </div>
+  </footer>
+
+  <!-- ============================================================
+       스크롤 등장 효과 (JS)
+       페이지를 스크롤할 때 섹션이 부드럽게 나타납니다.
+       ============================================================ -->
+  <script>
+    // 첫 화면 로딩 시 바로 visible 처리
+    document.addEventListener('DOMContentLoaded', () => {
+      const fadeEls = document.querySelectorAll('.fade-up');
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.15 }
+      );
+
+      fadeEls.forEach((el) => observer.observe(el));
+
+      // 첫 화면의 히어로 요소는 바로 보이기
+      document.querySelector('.hero')?.classList.add('visible');
+    });
+  </script>
+
+</body>
+</html>
